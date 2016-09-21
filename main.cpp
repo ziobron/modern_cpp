@@ -163,6 +163,7 @@ int main()
 
     std::thread queueThread(runQueue);
     pushShapesToQueue(shapes);
+    g_queue.push(NULL);
 
     queueThread.join();
 
