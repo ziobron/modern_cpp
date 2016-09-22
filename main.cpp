@@ -12,7 +12,7 @@ using namespace std;
 
 using Collection = vector<Shape*>;
 
-bool sortByArea(Shape* first, Shape* second)
+auto sortByArea(Shape* first, Shape* second)
 {
     if(first == nullptr || second == nullptr)
     {
@@ -21,7 +21,7 @@ bool sortByArea(Shape* first, Shape* second)
     return (first->getArea() < second->getArea());
 }
 
-bool perimeterBiggerThan20(Shape* s)
+auto perimeterBiggerThan20(Shape* s)
 {
     if(s)
     {
@@ -30,7 +30,7 @@ bool perimeterBiggerThan20(Shape* s)
     return false;
 }
 
-bool areaLessThan10(Shape* s)
+auto areaLessThan10(Shape* s)
 {
     if(s)
     {
@@ -41,11 +41,11 @@ bool areaLessThan10(Shape* s)
 
 void printCollectionElements(const Collection& collection)
 {
-    for(Collection::const_iterator it = collection.begin(); it != collection.end(); ++it)
+    for(auto const& item : collection)
     {
-        if(*it != nullptr)
+        if(item != nullptr)
         {
-            (*it)->print();
+            item->print();
         }
     }
 }
@@ -58,11 +58,11 @@ void printArea(std::string name, double area)
 void printAreas(const Collection& collection)
 {
     std::vector<std::thread> threads;
-    for(vector<Shape*>::const_iterator it = collection.begin(); it != collection.end(); ++it)
+    for(auto const& item : collection)
     {
-        if(*it != nullptr)
+        if(item != nullptr)
         {
-            std::thread th(printArea, (*it)->getName(), (*it)->getArea());
+            std::thread th(printArea, item->getName(), item->getArea());
             threads.push_back(std::move(th));
         }
     }
@@ -76,7 +76,7 @@ void findFirstShapeMatchingPredicate(const Collection& collection,
                                      bool (*predicate)(Shape* s),
                                      std::string info)
 {
-    Collection::const_iterator iter = std::find_if(collection.begin(), collection.end(), predicate);
+    auto iter = std::find_if(collection.begin(), collection.end(), predicate);
     if(*iter != nullptr)
     {
         cout << std::endl << "First shape matching predicate: " << info << endl;
@@ -108,10 +108,10 @@ BlockingQueue g_queue;
 
 void runQueue()
 {
-    bool running = true;
+    auto running = true;
     while(running)
     {
-        Shape * shape = g_queue.pop();
+        auto shape = g_queue.pop();
         if(shape == nullptr)
         {
             std::cout << "Queue received nullptr, finishing loop" << std::endl;
@@ -126,9 +126,9 @@ void runQueue()
 
 void pushShapesToQueue(Collection const& shapes)
 {
-    for(int i = 0; i < shapes.size(); ++i)
+    for(auto const& item : shapes)
     {
-        g_queue.push(shapes[i]);
+        g_queue.push(item);
     }
 }
 
@@ -153,13 +153,13 @@ int main()
     cout << std::endl << "Areas after sort: " << std::endl;
     printAreas(shapes);
 
-    Square* square = new Square(4.0, Color::ORANGE);
+    auto square = new Square(4.0, Color::ORANGE);
     shapes.push_back(square);
 
     findFirstShapeMatchingPredicate(shapes, perimeterBiggerThan20, "perimeter bigger than 20");
     findFirstShapeMatchingPredicate(shapes, areaLessThan10, "area less than 10");
 
-    std::thread queueThread(runQueue);
+    auto queueThread = std::thread(runQueue);
     pushShapesToQueue(shapes);
     g_queue.push(nullptr);
 
