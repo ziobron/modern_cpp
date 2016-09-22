@@ -8,8 +8,8 @@ public:
     Circle(double r, Color color);
     Circle(const Circle & other) = default;
 
-    double getArea() const override;
-    double getPerimeter() const override;
+    double getArea() const noexcept override;
+    double getPerimeter() const noexcept override;
     double getRadius() const;
     std::string getName() const override;
     void print() const override;

@@ -8,8 +8,8 @@ public:
     Rectangle(double x, double y, Color color);
     Rectangle(const Rectangle & other) = default;
 
-    double getArea() const override;
-    double getPerimeter() const override;
+    double getArea() const noexcept override;
+    double getPerimeter() const noexcept override;
     double getX() const;
     double getY() const;
     std::string getName() const override;
