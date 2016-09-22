@@ -1,12 +1,14 @@
 #include "Rectangle.hpp"
 #include <iostream>
 
-Rectangle::Rectangle(double x, double y)
-    : x_(x),
+Rectangle::Rectangle(double x, double y, Color color)
+    : Shape(color),
+      x_(x),
       y_(y)
 {}
 
 Rectangle::Rectangle(const Rectangle &other)
+    : Shape(other.getColor())
 {
     x_ = other.getX();
     y_ = other.getY();

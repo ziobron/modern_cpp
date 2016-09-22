@@ -1,12 +1,12 @@
 #include "Square.hpp"
 #include <iostream>
 
-Square::Square(double x)
-    : Rectangle(x, x)
+Square::Square(double x, Color color)
+    : Rectangle(x, x, color)
 {}
 
 Square::Square(const Square &other)
-    : Rectangle(other.getX(), other.getX())
+    : Rectangle(other.getX(), other.getX(), other.getColor())
 {}
 
 double Square::getArea()

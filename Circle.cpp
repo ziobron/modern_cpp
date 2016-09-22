@@ -2,11 +2,13 @@
 #include <math.h>
 #include <iostream>
 
-Circle::Circle(double r)
-    : r_(r)
+Circle::Circle(double r, Color color)
+    : Shape(color)
+    , r_(r)
 {}
 
 Circle::Circle(const Circle & other)
+    : Shape(other.getColor())
 {
     r_ = other.getRadius();
 }
