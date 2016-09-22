@@ -7,13 +7,6 @@ Rectangle::Rectangle(double x, double y, Color color)
       y_(y)
 {}
 
-Rectangle::Rectangle(const Rectangle &other)
-    : Shape(other.getColor())
-{
-    x_ = other.getX();
-    y_ = other.getY();
-}
-
 double Rectangle::getArea() const
 {
     return x_ * y_;

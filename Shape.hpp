@@ -16,7 +16,10 @@ public:
     Shape(Color color)
         : m_color(color)
     {}
-    virtual ~Shape() {}
+
+    Shape(Shape const& src) = default;
+
+    virtual ~Shape() = default;
 
     virtual double getArea() const = 0;
     virtual double getPerimeter() const = 0;

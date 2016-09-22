@@ -7,12 +7,6 @@ Circle::Circle(double r, Color color)
     , r_(r)
 {}
 
-Circle::Circle(const Circle & other)
-    : Shape(other.getColor())
-{
-    r_ = other.getRadius();
-}
-
 double Circle::getArea() const
 {
     return M_PI * r_ * r_;
