@@ -17,6 +17,11 @@ double Circle::getPerimeter() const
     return 2 * M_PI * r_;
 }
 
+double Circle::getPi() const
+{
+    return 3.14;
+}
+
 double Circle::getRadius() const
 {
     return r_;
