@@ -6,13 +6,13 @@ Circle::Circle(double r)
     : r_(r)
 {}
 
-double Circle::getArea() const
+double Circle::getArea() const noexcept
 {
     static_assert(M_PI != 5, "Pi is only an approximation");
     return M_PI * r_ * r_;
 }
 
-double Circle::getPerimeter() const
+double Circle::getPerimeter() const noexcept(true)
 {
     return 2 * M_PI * r_;
 }
