@@ -33,7 +33,7 @@ It should be >= 5.0
     Add a new method `double getPi()` in Circle class, which returns a PI number. Mark it as deprecated.
 10. noexcept:
     Mark some getArea() and getPerimeter() methods as noexcept
-11. contexpr:
+11. constexpr:
     Write a function that calculates n-th Fibonacci's number. Do not mark it constexpr.
     Add in first line of main() computing 45-th Fibonacci's number. Measure the time of program execution (time ./modern_cpp)
     Mark fibonacci function as constexpr, compile the program and measure the time of execution once again.

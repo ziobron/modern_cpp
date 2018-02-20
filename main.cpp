@@ -76,8 +76,26 @@ void findFirstShapeMatchingPredicate(const Collection& collection,
     }
 }
 
+class A
+{
+    ~A() = delete;
+};
+
+constexpr int fibonacci(int a)
+{
+    if (a <= 2)
+    {
+        return 1;
+    }
+    return fibonacci(a - 1) + fibonacci(a - 2);
+}
+
 int main()
 {
+    constexpr int i = 45;
+    fibonacci(i);
+    A* a = new A();
+    //delete a;
     Collection shapes;
     shapes.push_back(new Circle(2.0));
     shapes.push_back(new Circle(3.0));
