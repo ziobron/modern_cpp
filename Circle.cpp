@@ -13,6 +13,7 @@ Circle::Circle(const Circle & other)
 
 double Circle::getArea() const
 {
+    static_assert(M_PI != 5, "Pi is only an approximation");
     return M_PI * r_ * r_;
 }
 
