@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <memory>
 #include "Shape.hpp"
 #include "Rectangle.hpp"
 #include "Square.hpp"
@@ -9,9 +10,9 @@
 
 using namespace std;
 
-using Collection = vector<Shape*>;
+using Collection = vector<shared_ptr<Shape>>;
 
-auto sortByArea(Shape* first, Shape* second)
+auto sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second)
 {
     if(first == nullptr || second == nullptr)
     {
@@ -20,7 +21,7 @@ auto sortByArea(Shape* first, Shape* second)
     return (first->getArea() < second->getArea());
 }
 
-auto perimeterBiggerThan20(Shape* s)
+auto perimeterBiggerThan20(shared_ptr<Shape> s)
 {
     if(s)
     {
@@ -29,7 +30,7 @@ auto perimeterBiggerThan20(Shape* s)
     return false;
 }
 
-auto areaLessThan10(Shape* s)
+auto areaLessThan10(shared_ptr<Shape> s)
 {
     if(s)
     {
@@ -61,7 +62,7 @@ void printAreas(const Collection& collection)
 }
 
 void findFirstShapeMatchingPredicate(const Collection& collection,
-                                     bool (*predicate)(Shape* s),
+                                     bool (*predicate)(shared_ptr<Shape> s),
                                      std::string info)
 {
     auto iter = std::find_if(collection.begin(), collection.end(), predicate);
@@ -92,18 +93,18 @@ constexpr int fibonacci(int a)
 
 int main()
 {
-    constexpr int i = 45;
-    fibonacci(i);
-    A* a = new A();
+//    constexpr int i = 45;
+//    fibonacci(i);
+    //A* a = new A();
     //delete a;
     Collection shapes {
-        new Circle(2.0),
-        new Circle(3.0),
+        make_shared<Circle>(2.0),
+        shared_ptr<Shape>(new Circle(3.0)),
         nullptr,
-        new Circle(4.0),
-        new Rectangle(10.0, 5.0),
-        new Square(3.0),
-        new Circle(4.0),
+        make_shared<Circle>(4.0),
+        make_shared<Rectangle>(10.0, 5.0),
+        make_shared<Square>(3.0),
+        make_shared<Circle>(4.0),
     };
 
     printCollectionElements(shapes);
@@ -116,11 +117,23 @@ int main()
     cout << "Areas after sort: " << std::endl;
     printAreas(shapes);
 
-    auto square = new Square(4.0);
+    shared_ptr<Shape> square = make_shared<Square>(4.0);
     shapes.push_back(square);
+
+    unique_ptr<Shape> cc = make_unique<Circle>(5.0);
+    shapes.push_back(move(cc));
+
+//    auto cc = new Circle(4.0);
+//    shapes.emplace_back(std::move(cc));
+
+//    Circle circle(2.0);
+//    Circle c2(std::move(circle));
+
+//    c2.getPerimeter();
 
     findFirstShapeMatchingPredicate(shapes, perimeterBiggerThan20, "perimeter bigger than 20");
     findFirstShapeMatchingPredicate(shapes, areaLessThan10, "area less than 10");
+
     std::cout << alignof(Circle) << std::endl;
 
     return 0;
