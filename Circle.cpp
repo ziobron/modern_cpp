@@ -6,6 +6,16 @@ Circle::Circle(double r)
     : r_(r)
 {}
 
+Circle::Circle(Circle && other) noexcept
+    : r_(std::move(other.r_))
+{}
+
+Circle& Circle::operator=(Circle && other) noexcept
+{
+    r_ = std::move(other.r_);
+}
+
+
 double Circle::getArea() const noexcept
 {
     static_assert(M_PI != 5, "Pi is only an approximation");
