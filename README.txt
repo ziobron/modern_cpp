@@ -53,7 +53,8 @@ It should be >= 5.0
     Replace raw pointers with shared_ptrs.
     Add a new unique_ptr to Circle and find a way to add it to the collection
 16. delegating constructors:
-    Add a new constructor, which takes also the previously defined Color of a shape. You can use a default parameter for Color.
+    Add a new constructor, which takes also the previously defined Color of a shape.
+    You can use a default parameter for Color.
     Delegate a call in old constructor to the new one.
 17. lambda functions:
     Change functions from main.cpp into lambdas (sortByArea, perimeterBiggerThan20, areaLessThan10)
@@ -61,6 +62,7 @@ It should be >= 5.0
 18. variadic templates:
     Write a factory method which should work like std::make_shared.
     It should have below signature:
-        template<class DerivedType, class... Arguments> std::shared_ptr<Shape> make_shape(Arguments&&... args);
+        template<class DerivedType, class... Arguments>
+        std::shared_ptr<Shape> make_shape(Arguments&&... args);
     Inside, it should create a shared_ptr to DerivedType and pass all arguments into construtor of DerivedType via perfect forwarding.
         

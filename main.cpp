@@ -64,6 +64,12 @@ constexpr int fibonacci(int a)
     return fibonacci(a - 1) + fibonacci(a - 2);
 }
 
+template<class DerivedType, class... Arguments>
+std::shared_ptr<Shape> make_shape(Arguments&&... args)
+{
+    return make_shared<DerivedType>(forward<Arguments>(args)...);
+}
+
 int main()
 {
 //    constexpr int i = 45;
@@ -71,13 +77,13 @@ int main()
     //A* a = new A();
     //delete a;
     Collection shapes {
-        make_shared<Circle>(2.0, Color::RED),
+        make_shape<Circle>(2.0, Color::RED),
         shared_ptr<Shape>(new Circle(3.0)),
         nullptr,
-        make_shared<Circle>(4.0),
-        make_shared<Rectangle>(10.0, 5.0, Color::GREEN),
-        make_shared<Square>(3.0, Color::BLUE),
-        make_shared<Circle>(4.0),
+        make_shape<Circle>(4.0),
+        make_shape<Rectangle>(10.0, 5.0, Color::GREEN),
+        make_shape<Square>(3.0, Color::BLUE),
+        make_shape<Circle>(4.0),
     };
 
     auto lambda = [shapes]() mutable { shapes.clear(); };
