@@ -5,10 +5,12 @@
 class alignas(2) Circle final : public Shape
 {
 public:
-    Circle(double r);
     Circle(const Circle & other) = default;
     Circle(Circle && other) noexcept;
     Circle& operator=(Circle && other) noexcept;
+
+    Circle(double r);
+    Circle(double r, Color c);
 
     double getArea() const noexcept override;
     double getPerimeter() const noexcept(true) override;

@@ -3,7 +3,11 @@
 #include <iostream>
 
 Circle::Circle(double r)
-    : r_(r)
+    : Circle(r, Color::GREEN)
+{}
+
+Circle::Circle(double r, Color c)
+    : r_(r), Shape(c)
 {}
 
 Circle::Circle(Circle && other) noexcept

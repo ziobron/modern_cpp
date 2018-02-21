@@ -11,6 +11,9 @@ class Shape
 {
 public:
     virtual ~Shape() {}
+
+    Shape(Color c);
+
     Shape() = default;
     Shape(Shape && other) noexcept = default;
     Shape& operator=(Shape&& other) noexcept = default;

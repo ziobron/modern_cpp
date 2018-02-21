@@ -98,12 +98,12 @@ int main()
     //A* a = new A();
     //delete a;
     Collection shapes {
-        make_shared<Circle>(2.0),
+        make_shared<Circle>(2.0, Color::RED),
         shared_ptr<Shape>(new Circle(3.0)),
         nullptr,
         make_shared<Circle>(4.0),
-        make_shared<Rectangle>(10.0, 5.0),
-        make_shared<Square>(3.0),
+        make_shared<Rectangle>(10.0, 5.0, Color::GREEN),
+        make_shared<Square>(3.0, Color::BLUE),
         make_shared<Circle>(4.0),
     };
 
