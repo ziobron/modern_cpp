@@ -52,6 +52,7 @@ void findFirstShapeMatchingPredicate(const Collection& collection,
 
 class A
 {
+    // for intentional memory leak :)
     ~A() = delete;
 };
 
@@ -72,10 +73,12 @@ std::shared_ptr<Shape> make_shape(Arguments&&... args)
 
 int main()
 {
-//    constexpr int i = 45;
-//    fibonacci(i);
-    //A* a = new A();
+    constexpr int i = 45;
+    fibonacci(i);
+    A* a = new A();
     //delete a;
+
+
     Collection shapes {
         make_shape<Circle>(2.0, Color::RED),
         shared_ptr<Shape>(new Circle(3.0)),
@@ -112,13 +115,8 @@ int main()
     unique_ptr<Shape> cc = make_unique<Circle>(5.0);
     shapes.push_back(move(cc));
 
-//    auto cc = new Circle(4.0);
-//    shapes.emplace_back(std::move(cc));
-
-//    Circle circle(2.0);
-//    Circle c2(std::move(circle));
-
-//    c2.getPerimeter();
+    auto c2 = new Circle(4.0);
+    shapes.emplace_back(std::move(cc));
 
     auto perimeterBiggerThan20 = [](shared_ptr<Shape> s)
     {
