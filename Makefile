@@ -1,7 +1,6 @@
 CXX=g++
 CXXFLAGS=-Wall -Wextra -Wpedantic -Werror -Iincludes -std=c++17
-$<=debug release
-SOURCES=*cpp
+SOURCES=*cpp.
 
 .PHONY: all
 all: $<
