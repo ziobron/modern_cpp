@@ -1,17 +1,17 @@
-CC=g++
-CFLAGS=-Wall -Wextra -Wpedantic -Werror -Iincludes
-SOURCES=debug release
-OBJECTS=*cpp -std=c++17
+CXX=g++
+CXXFLAGS=-Wall -Wextra -Wpedantic -Werror -Iincludes -std=c++17
+$<=debug release
+SOURCES=*cpp
 
 .PHONY: all
-all: $(SOURCES)
+all: $<
 
 debug: *.cpp includes/*.hpp
-	$(CC) $(OBJECTS) $(CFLAGS) -g -o debug
+	$(CXX) $(SOURCES) $(CXXFLAGS) -g -o $@
 
 release: *.cpp includes/*.hpp
-	$(CC) $(OBJECTS) $(CFLAGS) -O3 -o release
+	$(CXX) $(SOURCES) $(CXXFLAGS) -O3 -o $@
 
 .PHONY: clean
 clean:
-	rm $(SOURCES)
+	rm $<
