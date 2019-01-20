@@ -1,16 +1,16 @@
-CC=g++
-CFLAGS=-std=c++17 -Wall -Wextra -Wpedantic -Werror
-LDFLAGS=-I inc
+CXX=g++
+CXXFLAGS=-std=c++17 -Wall -Wextra -Wpedantic -Werror
+IFLAGS=-I inc
 SOURCES=*.cpp
 
 .PHONY: all
 all: debug release
 
 debug: $(SOURCES)
-	$(CC) $(SOURCES) $(CFLAGS) $(LDFLAGS) -g -o $@
+	$(CXX) $^ $(CXXFLAGS) $(IFLAGS) -g -o $@
 
 release: $(SOURCES)
-	$(CC) $(SOURCES) $(CFLAGS) $(LDFLAGS) -O3 -o $@
+	$(CXX) $^ $(CXXFLAGS) $(IFLAGS) -O3 -o $@
 
 .PHONY: clean
 clean:
