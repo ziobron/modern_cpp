@@ -1,14 +1,15 @@
 CXX=g++
 CXXFLAGS=-Wall -Wextra -Wpedantic -Werror -Iincludes -std=c++17
-SOURCES=*cpp.
+SOURCES=*.cpp
+INCLUDES=includes/*.hpp
 
 .PHONY: all
 all: $<
 
-debug: *.cpp includes/*.hpp
+debug: $(SOURCE) $(INCLUDES)
 	$(CXX) $(SOURCES) $(CXXFLAGS) -g -o $@
 
-release: *.cpp includes/*.hpp
+release: $(SOURCE) $(INCLUDES)
 	$(CXX) $(SOURCES) $(CXXFLAGS) -O3 -o $@
 
 .PHONY: clean
