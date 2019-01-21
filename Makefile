@@ -1,12 +1,21 @@
-#target which is not a file
+#phony is used to specify that target is not a file 
+#(to avoid conflicts when there are files named clean or all)
+
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -Werror
+HEADERSFLAG = -Iinc
+
+SRCS = *.cpp
+INCS = inc/*.hpp
+
 .PHONY: all 
 all: debug release
 
-debug: *.cpp inc/*.hpp
-	g++ *.cpp -std=c++17 -Wall -Wextra -Werror -g -o debug -Iinc
+debug: $(SRCS) $(INCS) 
+	$(CXX) $(CXXFLAGS) $(HEADERSFLAG) -g -o $@ $(SRCS)
 
-release: *.cpp inc/*.hpp
-	g++ *.cpp -std=c++17 -Wall -Wextra -Werror -O3 -o release -Iinc
+release: $(SRCS) $(INCS)
+	$(CXX) $(CXXFLAGS) $(HEADERSFLAG) -O3 -o $@ $(SRCS)
 
 .PHONY: clean
 clean:
